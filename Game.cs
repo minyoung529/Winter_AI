@@ -588,6 +588,76 @@ namespace Reinforcement_Learning
             return 0.0f;
         }
 
+        private string GetTurnMark()
+        {
+            return NextTurn == 1 ? "X" : "O";
+        }
 
+        // GetGBVal : GetGameBoardValue
+        private string GetGBVal(int row, int col)
+        {
+            switch (BoardState[row, col])
+            {
+                case 1: return "X";
+                case 2: return "O";
+                case 0: return "+";
+                default: return "";
+            }
+        }
+
+        public void DisplayBoard(int turnCount, int lastMove, GamePlayer black, GamePlayer white)
+        {
+            Console.Clear();
+            Console.WriteLine(Environment.NewLine);
+
+            Console.WriteLine($"X : {black}, O : {white}");
+            Console.Write($"게임 턴 : {turnCount}, ");
+            Console.WriteLine($"{GetTurnMark()}");
+            Console.WriteLine(Environment.NewLine);
+
+            if (IsValidFirstStage())
+            {
+                Console.WriteLine("1단계 진행중입니다.");
+            }
+            else
+            {
+                Console.WriteLine("2단계 진행중입니다.");
+            }
+
+            if (lastMove != 0)
+            {
+                Console.WriteLine($"지난 행동, row : {(lastMove - 1) / 3}, col: {(lastMove - 1 % 3)}");
+            }
+
+            Console.WriteLine(Environment.NewLine);
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    Console.Write($"       {GetGBVal(i, j)}");
+                }
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(Environment.NewLine);
+            }
+
+            isFinalState();
+            Console.WriteLine(Environment.NewLine);
+
+            switch(GameWinner)
+            {
+                case 1:
+                    Console.WriteLine("X가 이겼습니다!");
+                    break;
+
+                case 2:
+                    Console.WriteLine("O가 이겼습니다!");
+                    break;
+
+                default:
+                    Console.WriteLine("게임이 진행중입니다!");
+                    break;
+            }
+        }
     }
 }
