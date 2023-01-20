@@ -23,7 +23,6 @@ namespace Mini_Othello
 		public void UpdateByQLearning()
 		{
 			InitializeValueFunction();
-
 			ApplyQLearning();
 		}
 
@@ -102,7 +101,7 @@ namespace Mini_Othello
 					Console.WriteLine($"에피소드를 {episodeCount}개 처리했습니다. {functionAccuracy}");
 				}
 
-				if (episodeCount > 1000000) // 에피소드 100만개 처리 후 종료
+				if (episodeCount > 100000) // 에피소드 100만개 처리 후 종료
 				{
 					if (isDPFunctionAvailable)
 					{
